@@ -1,0 +1,64 @@
+# Archivos de entorno y configuración local
+.env
+.env.local
+.env.production
+
+# Archivos de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+
+# Base de datos y backups (MUY IMPORTANTE - archivos grandes)
+database-backup.json
+*.json.backup
+*.dump
+*.sql
+
+# Archivos temporales de Excel y análisis
+*.xls
+*.xlsx
+excel_analysis.json
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos del sistema
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Node modules (frontend)
+fundaciones-frontend/node_modules/
+fundaciones-frontend/.next/
+fundaciones-frontend/out/
+fundaciones-frontend/build/
+fundaciones-frontend/coverage/
+fundaciones-frontend/.vercel
+fundaciones-frontend/.env*
+fundaciones-frontend/*.tsbuildinfo
+
+# Archivos de prueba y desarrollo
+test-connection.js
+*.test.js
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos temporales
+*.tmp
+*.temp

@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: fundaciones_mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: fundaciones_espana
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./database-backup.json:/docker-entrypoint-initdb.d/backup.json:ro
+    networks:
+      - fundaciones_network
+
+  app:
+    build: ./fundaciones-frontend
+    container_name: fundaciones_app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=mongodb://admin:password123@mongodb:27017/fundaciones_espana?authSource=admin
+      - NEXTAUTH_SECRET=your-super-secret-key-here
+      - NEXTAUTH_URL=http://localhost:3000
+    depends_on:
+      - mongodb
+    networks:
+      - fundaciones_network
+
+volumes:
+  mongodb_data:
+
+networks:
+  fundaciones_network:
+    driver: bridge
