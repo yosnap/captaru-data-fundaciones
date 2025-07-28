@@ -86,7 +86,7 @@ export async function POST(request: NextRequest) {
     const { db } = await connectToDatabase();
     const { id } = await request.json();
     
-    const fundacion = await db.collection('fundaciones').findOne({ _id: parseInt(id) });
+    const fundacion = await db.collection('fundaciones').findOne({ _id: parseInt(id) } as any);
     
     if (!fundacion) {
       return NextResponse.json(
