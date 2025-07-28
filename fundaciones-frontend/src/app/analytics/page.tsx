@@ -97,7 +97,7 @@ export default function Analytics() {
               {stats.byEstado.find(s => s._id === 'Activa')?.count?.toLocaleString('es-ES') || '0'}
             </p>
             <p className="text-xs text-gray-500 mt-1">
-              {((stats.byEstado.find(s => s._id === 'Activa')?.count / stats.total) * 100 || 0).toFixed(1)}%
+              {(((stats.byEstado.find(s => s._id === 'Activa')?.count || 0) / stats.total) * 100).toFixed(1)}%
             </p>
           </div>
           
@@ -479,7 +479,7 @@ export default function Analytics() {
               </div>
               <div className="text-right">
                 <p className="text-3xl font-bold text-green-600">
-                  {(((stats.activeFundacionesWithContact / (stats.byEstado.find(s => s._id === 'Activa')?.count || 1)) * 100) || 0).toFixed(1)}%
+                  {(((stats.activeFundacionesWithContact / ((stats.byEstado.find(s => s._id === 'Activa')?.count || 1))) * 100) || 0).toFixed(1)}%
                 </p>
                 <p className="text-sm text-gray-500">Conectividad</p>
               </div>
