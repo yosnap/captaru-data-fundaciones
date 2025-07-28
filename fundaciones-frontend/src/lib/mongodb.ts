@@ -4,12 +4,10 @@ if (!process.env.MONGODB_URI) {
   throw new Error('Please define the MONGODB_URI environment variable');
 }
 
-if (!process.env.MONGODB_DB_NAME) {
-  throw new Error('Please define the MONGODB_DB_NAME environment variable');
-}
-
 const uri = process.env.MONGODB_URI;
-const dbName = process.env.MONGODB_DB_NAME;
+
+// Extract database name from URI or use default
+const dbName = process.env.MONGODB_DB_NAME || 'fundaciones_espana';
 
 let cachedClient: MongoClient | null = null;
 let cachedDb: Db | null = null;
