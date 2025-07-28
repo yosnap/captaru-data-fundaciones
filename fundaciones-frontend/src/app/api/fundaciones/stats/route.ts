@@ -80,9 +80,9 @@ export async function GET(request: NextRequest) {
       db.collection('fundaciones').countDocuments({
         estado: 'Activa',
         $or: [
-          { 'direccionEstatutaria.email': { $exists: true, $ne: null, $ne: '' } },
-          { 'direccionEstatutaria.web': { $exists: true, $ne: null, $ne: '' } },
-          { 'direccionEstatutaria.telefono': { $exists: true, $ne: null, $ne: '' } }
+          { 'direccionEstatutaria.email': { $exists: true, $nin: [null, ''] } },
+          { 'direccionEstatutaria.web': { $exists: true, $nin: [null, ''] } },
+          { 'direccionEstatutaria.telefono': { $exists: true, $nin: [null, ''] } }
         ]
       }),
       
@@ -110,8 +110,11 @@ export async function GET(request: NextRequest) {
     const yearlyTrends = await db.collection('fundaciones').aggregate([
       { 
         $match: { 
-          fechaConstitucion: { $exists: true, $ne: null, $ne: '' },
-          fechaConstitucion: { $regex: /^\d{2}\/\d{2}\/\d{4}$/ }
+          fechaConstitucion: { 
+            $exists: true, 
+            $nin: [null, ''], 
+            $regex: /^\d{2}\/\d{2}\/\d{4}$/ 
+          }
         } 
       },
       {

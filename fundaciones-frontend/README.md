@@ -1,4 +1,13 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏛️ Fundaciones Frontend
+
+This is a [Next.js](https://nextjs.org) project for managing Spanish foundations data, bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Features
+- MongoDB integration with 5,657 Spanish foundations
+- Advanced filtering and search capabilities  
+- Interactive analytics dashboard
+- Export functionality (CSV/JSON)
+- Responsive design with Tailwind CSS
 
 ## Getting Started
 

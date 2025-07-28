@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Header from '@/components/layout/Header';
 import { Eye, ChevronDown, ChevronUp, ArrowLeft } from 'lucide-react';
@@ -40,7 +40,7 @@ interface Foundation {
   organos: Array<{ nombre: string }>;
 }
 
-export default function Data() {
+function DataContent() {
   const searchParams = useSearchParams();
   const foundationId = searchParams.get('id');
   
@@ -588,5 +588,15 @@ export default function Data() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function Data() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+    </div>}>
+      <DataContent />
+    </Suspense>
   );
 }
