@@ -8,14 +8,14 @@ export async function GET() {
     
     // Get provinces with counts
     const provinciasWithCounts = await collection.aggregate([
-      { $match: { 'direccionEstatutaria.provincia': { $exists: true, $ne: null, $ne: '' } } },
+      { $match: { 'direccionEstatutaria.provincia': { $exists: true, $nin: [null, ''] } } },
       { $group: { _id: '$direccionEstatutaria.provincia', count: { $sum: 1 } } },
       { $sort: { _id: 1 } }
     ]).toArray();
     
     // Get states with counts
     const estadosWithCounts = await collection.aggregate([
-      { $match: { estado: { $exists: true, $ne: null, $ne: '' } } },
+      { $match: { estado: { $exists: true, $nin: [null, ''] } } },
       { $group: { _id: '$estado', count: { $sum: 1 } } },
       { $sort: { _id: 1 } }
     ]).toArray();
@@ -23,7 +23,7 @@ export async function GET() {
     // Get activities with counts
     const actividadesWithCounts = await collection.aggregate([
       { $unwind: '$actividades' },
-      { $match: { 'actividades.clasificacion1': { $exists: true, $ne: null, $ne: '' } } },
+      { $match: { 'actividades.clasificacion1': { $exists: true, $nin: [null, ''] } } },
       { $group: { _id: '$actividades.clasificacion1', count: { $sum: 1 } } },
       { $sort: { _id: 1 } }
     ]).toArray();
@@ -31,7 +31,7 @@ export async function GET() {
     // Get functions with counts
     const funcionesWithCounts = await collection.aggregate([
       { $unwind: '$actividades' },
-      { $match: { 'actividades.funcion1': { $exists: true, $ne: null, $ne: '' } } },
+      { $match: { 'actividades.funcion1': { $exists: true, $nin: [null, ''] } } },
       { $group: { _id: '$actividades.funcion1', count: { $sum: 1 } } },
       { $sort: { _id: 1 } }
     ]).toArray();
